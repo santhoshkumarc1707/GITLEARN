@@ -1,1 +1,144 @@
+import React, { useRef, useState } from 'react';
+import SignatureCanvas from 'react-signature-canvas';
+import './form.scss';
+
+const PermitToWorkForm = () => {
+    const sigRefA = useRef({});
+    const sigRefB = useRef({});
+    const sigRefC = useRef({});
+    const sigRefD = useRef({});
+    const sigRefE = useRef({});
+
+    const [signatureA, setSignatureA] = useState(null);
+    const [signatureB, setSignatureB] = useState(null);
+    const [signatureC, setSignatureC] = useState(null);
+    const [signatureD, setSignatureD] = useState(null);
+    const [signatureE, setSignatureE] = useState(null);
+
+    const handleSignatureEnd = (sigRef, setSignature) => {
+        setSignature(sigRef.current.toDataURL());
+    };
+
+    const clearSignature = (sigRef, setSignature) => {
+        sigRef.current.clear();
+        setSignature(null);
+    };
+
+    return (
+        <div className="permit-to-work-form">
+            <header>
+                <h1>SUPERSONIC AIR CONDITIONING & ELECTRICAL ENGINEERING PTE LTD</h1>
+                <p>10, Admiralty Street #04-08, North Link Building Singapore 757695</p>
+                <p>Tel: +65-6482 2633 Fax: +65-6481 5073</p>
+                <p>GST Reg No.: M2-0094863-7 E-mail: enquiry@supersonic.com.sg</p>
+            </header>
+
+            <section>
+                <h2>PERMIT-TO-WORK ON/ FOR HOT WORK</h2>
+                <p>(THIS COPY SHALL BE DISPLAYED AT PLACE OF WORK, AS APPROPRIATE)</p>
+
+                <div className="form-section">
+                    <h3>PART A - PTW Application by Trade Supervisor & Engineer (PTW Applicant)</h3>
+                    <p>I fully understand the nature of the work and safety conditions that must be met. I have inspected the safety conditions relating to the work to be performed. I shall ensure that the safety conditions required is met throughout the duration of this permit.</p>
+                    <label>
+                        Name: <input type="text" />
+                    </label>
+                    <label>
+                        Signature: <SignatureCanvas ref={sigRefA} onEnd={() => handleSignatureEnd(sigRefA, setSignatureA)} penColor="black" canvasProps={{ width: 300, height: 100, className: 'signature-pad' }} />
+                    </label>
+                    <button onClick={() => clearSignature(sigRefA, setSignatureA)}>Clear</button>
+                    <label>
+                        Date: <input type="date" />
+                    </label>
+                    <label>
+                        Time: <input type="time" />
+                    </label>
+                </div>
+
+                <div className="form-section">
+                    <h3>PART B - Assess by Safety Department</h3>
+                    <label>
+                        Name: <input type="text" />
+                    </label>
+                    <label>
+                        Signature: <SignatureCanvas ref={sigRefB} onEnd={() => handleSignatureEnd(sigRefB, setSignatureB)} penColor="black" canvasProps={{ width: 300, height: 100, className: 'signature-pad' }} />
+                    </label>
+                    <button onClick={() => clearSignature(sigRefB, setSignatureB)}>Clear</button>
+                    <label>
+                        Date: <input type="date" />
+                    </label>
+                    <label>
+                        Time: <input type="time" />
+                    </label>
+                </div>
+
+                <div className="form-section">
+                    <h3>PART C - PTW Approval by **Project Manager/ Appointed Manager</h3>
+                    <label>
+                        Name: <input type="text" />
+                    </label>
+                    <label>
+                        Signature: <SignatureCanvas ref={sigRefC} onEnd={() => handleSignatureEnd(sigRefC, setSignatureC)} penColor="black" canvasProps={{ width: 300, height: 100, className: 'signature-pad' }} />
+                    </label>
+                    <button onClick={() => clearSignature(sigRefC, setSignatureC)}>Clear</button>
+                    <label>
+                        Date: <input type="date" />
+                    </label>
+                    <label>
+                        Time: <input type="time" />
+                    </label>
+                </div>
+            </section>
+
+            <section>
+                <h2>Permit-To-Work Closure/Revocation</h2>
+
+                <div className="form-section">
+                    <h3>PART D - Notification of Works Completed or Expiry of PTW by Trade Supervisor & Engineer</h3>
+                    <label>
+                        <input type="checkbox" /> The above stated work was not completed and a PTW need to be reapplied, or
+                    </label>
+                    <label>
+                        <input type="checkbox" /> Revocation of PTW due to unsafe circumstances
+                    </label>
+                    <label>
+                        <input type="checkbox" /> I confirm that the above-stated work was completed on <input type="date" /> at <input type="time" /> hrs.
+                    </label>
+                    <label>
+                        Name: <input type="text" />
+                    </label>
+                    <label>
+                        Signature: <SignatureCanvas ref={sigRefD} onEnd={() => handleSignatureEnd(sigRefD, setSignatureD)} penColor="black" canvasProps={{ width: 300, height: 100, className: 'signature-pad' }} />
+                    </label>
+                    <button onClick={() => clearSignature(sigRefD, setSignatureD)}>Clear</button>
+                    <label>
+                        Date: <input type="date" />
+                    </label>
+                    <label>
+                        Time: <input type="time" />
+                    </label>
+                </div>
+
+                <div className="form-section">
+                    <h3>PART E - Acknowledged by Safety Department</h3>
+                    <label>
+                        Name: <input type="text" />
+                    </label>
+                    <label>
+                        Signature: <SignatureCanvas ref={sigRefE} onEnd={() => handleSignatureEnd(sigRefE, setSignatureE)} penColor="black" canvasProps={{ width: 300, height: 100, className: 'signature-pad' }} />
+                    </label>
+                    <button onClick={() => clearSignature(sigRefE, setSignatureE)}>Clear</button>
+                    <label>
+                        Date: <input type="date" />
+                    </label>
+                    <label>
+                        Time: <input type="time" />
+                    </label>
+                </div>
+            </section>
+        </div>
+    );
+};
+
+export default PermitToWorkForm;
 
