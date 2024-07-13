@@ -1,0 +1,53 @@
+//components
+import React, { useState, useEffect } from 'react';
+import Select from 'react-select';
+import axios from 'axios';
+
+const OptionSelect = ({ apiEndpoint }) => {
+  const [options, setOptions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchOptions = async () => {
+      try {
+        const response = await axios.get(apiEndpoint);
+        const data = response.data;
+        const formattedOptions = data.map(item => ({
+          value: item.value,
+          label: item.label,
+        }));
+        setOptions(formattedOptions);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+
+    fetchOptions();
+  }, [apiEndpoint]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error fetching options: {error.message}</div>;
+
+  return <Select options={options} />;
+};
+
+export default OptionSelect;
+//pages
+import React from 'react';
+import OptionSelect from './OptionSelect';
+
+const App = () => {
+  const apiEndpoint = 'https://api.example.com/options';
+
+  return (
+    <div>
+      <h1>Select Your Option</h1>
+      <OptionSelect apiEndpoint={apiEndpoint} />
+    </div>
+  );
+};
+
+export default App;
